@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class CustomDialog {
@@ -7,8 +5,8 @@ class CustomDialog {
     showDialog(
       context: context,
       builder: (_) {
-        var emailController = TextEditingController();
-        var messageController = TextEditingController();
+        var descriptionController = TextEditingController();
+        var amountController = TextEditingController();
         return AlertDialog(
           title: const Text('Add expense'),
           content: SingleChildScrollView(
@@ -16,11 +14,11 @@ class CustomDialog {
               //shrinkWrap: true,
               children: [
                 TextFormField(
-                  controller: messageController,
+                  controller: descriptionController,
                   decoration: const InputDecoration(hintText: 'Description'),
                 ),
                 TextFormField(
-                  controller: messageController,
+                  controller: amountController,
                   decoration: const InputDecoration(hintText: 'Amount'),
                 ),
               ],
@@ -34,8 +32,8 @@ class CustomDialog {
             TextButton(
               onPressed: () {
                 // Send them to your email maybe?
-                var email = emailController.text;
-                var message = messageController.text;
+                var email = descriptionController.text;
+                var message = amountController.text;
                 Navigator.pop(context);
               },
               child: const Text('Send'),

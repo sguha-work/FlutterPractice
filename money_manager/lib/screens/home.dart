@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/dialog.dart';
+import '../widgets/todays_expenses.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 3,
       child: Scaffold(
         appBar: AppBar(
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: const TabBarView(
           children: <Widget>[
             Center(
-              child: Text("It's cloudy here"),
+              child: TodaysExpenses(),
             ),
             Center(
               child: Text("It's rainy here"),
