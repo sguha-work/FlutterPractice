@@ -7,28 +7,30 @@ class TodaysExpenses extends StatefulWidget {
 }
 
 class _TodaysExpenses extends State<TodaysExpenses> {
-  final double heightOfListItem = 10;
+  final double heightOfListItem = 30;
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
   @override
   Widget build(context) {
-    return ListView(
+    return ListView.separated(
+      itemCount: entries.length,
       padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          height: heightOfListItem,
-          color: Colors.amber[600],
-          child: const Center(child: Text('Entry A')),
-        ),
-        Container(
-          height: heightOfListItem,
-          color: Colors.amber[500],
-          child: const Center(child: Text('Entry B')),
-        ),
-        Container(
-          height: heightOfListItem,
-          color: Colors.amber[100],
-          child: const Center(child: Text('Entry C')),
-        ),
-      ],
+      itemBuilder: (BuildContext context, int index) {
+        if (index == 0) {
+          return Container(
+            height: 50,
+            color: Colors.red[200],
+            child: const Center(child: Text('Todays Expense list')),
+          );
+        } else {
+          return Container(
+            height: heightOfListItem,
+            color: Colors.blue[colorCodes[index]],
+            child: Center(child: Text('Entry ${entries[index]}')),
+          );
+        }
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }
