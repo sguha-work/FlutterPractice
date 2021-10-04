@@ -15,7 +15,7 @@ class ParseCSV {
     }
   }
 
-  static String getCSVDataAsString(selectedFile) {
+  static String getCSVDataAsString(PlatformFile selectedFile) {
     String s = instance._getCharecterCode(selectedFile.bytes);
     if (s == 'error') {
       return s;
@@ -24,7 +24,7 @@ class ParseCSV {
     return utf8.decode(outputAsUint8List);
   }
 
-  static List<dynamic> getCSVLines(selectedFile) {
+  static List<dynamic> getCSVLines(PlatformFile selectedFile) {
     List csvFileContentList = [];
     String s = instance._getCharecterCode(selectedFile);
     if (s == 'error') {
