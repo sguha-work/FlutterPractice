@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 
 class ParseCSV {
   static final instance = ParseCSV();
+
   String _getCharecterCode(selectedFile) {
     try {
       String charecterCodeString = String.fromCharCodes(selectedFile.bytes);
