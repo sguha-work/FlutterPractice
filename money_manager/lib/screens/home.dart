@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/dialog.dart';
 import '../widgets/todays_expenses.dart';
+import '../widgets/csv_file_upload_test.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TodaysExpenses(),
             ),
             Center(
-              child: Text("It's rainy here"),
+              child: UploadCSV(),
             ),
             Center(
               child: Text("It's sunny here"),
