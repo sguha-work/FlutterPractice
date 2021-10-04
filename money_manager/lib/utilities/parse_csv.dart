@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:file_picker/file_picker.dart';
 
 class ParseCSV {
   static final instance = ParseCSV();
@@ -33,15 +34,16 @@ class ParseCSV {
     return csvFileContentList;
   }
 
-  static String getJSONFromCSV(selectedFile) {
+  static String getJSONFromCSV(PlatformFile selectedFile) {
     List lines = getCSVLines(selectedFile);
     String outputJSON = '';
     List<String> headers = lines[0].split(',');
     List<Map<String, dynamic>> listOfObject = [];
     for (int index1 = 1; index1 < lines.length; index1++) {
       final chunks = lines[index1].split(',');
+      Map<String, dynamic> objectData = {};
       chunks.asMap().forEach((index, element) {
-        Map<String, dynamic> objectData = {headers[index]: element};
+        objectData[headers[index]] = element;
         listOfObject.add(objectData);
       });
     }
