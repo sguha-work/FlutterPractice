@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'home_page.dart';
+import '../utilities/login_signup.dart';
+import '../widgets/dialog.dart';
 class SignupPage extends StatefulWidget {
   @override
   _SignupPage createState() => _SignupPage();
@@ -8,7 +10,20 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPage extends State<SignupPage> {
   TextEditingController dateOfBirthController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+
+  void _signup() {
+    String dateOfBirth = dateOfBirthController.text;
+    String fullName = fullNameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+    String confirmPassword = confirmPasswordController.text;
+    MyDialog.showAlertDialog(context, fullName);
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -22,6 +37,7 @@ class _SignupPage extends State<SignupPage> {
       });
     dateOfBirthController.text = selectedDate.toString();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +57,8 @@ class _SignupPage extends State<SignupPage> {
                     /*decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.network('https://logowik.com/content/uploads/images/flutter5786.jpg')),
+                    child: Image.network(
+                        'https://logowik.com/content/uploads/images/flutter5786.jpg')),
               ),
             ),
             Padding(
@@ -49,7 +66,7 @@ class _SignupPage extends State<SignupPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
+                controller: fullNameController,
                 obscureText: false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -65,14 +82,16 @@ class _SignupPage extends State<SignupPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextField(
-                  controller: dateOfBirthController,
+                    controller: dateOfBirthController,
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Date of birth',
                         hintText: 'Enter or select from below yyyy-mm-dd'),
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   RaisedButton(
                     onPressed: () => _selectDate(context),
                     child: Text('Select date of birth'),
@@ -84,6 +103,7 @@ class _SignupPage extends State<SignupPage> {
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
@@ -95,7 +115,7 @@ class _SignupPage extends State<SignupPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -108,7 +128,7 @@ class _SignupPage extends State<SignupPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
+                controller: confirmPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -124,7 +144,7 @@ class _SignupPage extends State<SignupPage> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: FlatButton(
                 onPressed: () {
-                  // ToDo
+                  _signup();
                 },
                 child: Text(
                   'Signup',
@@ -135,7 +155,6 @@ class _SignupPage extends State<SignupPage> {
             SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
           ],
         ),
       ),

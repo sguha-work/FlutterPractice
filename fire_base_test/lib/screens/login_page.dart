@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'signup_page.dart';
+import '../widgets/dialog.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPage createState() => _LoginPage();
 }
 
 class _LoginPage extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  _login() {
+    String email = emailController.text;
+    String password = passwordController.text;
+    MyDialog.showAlertDialog(context, email);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +36,15 @@ class _LoginPage extends State<LoginPage> {
                     /*decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.network('https://logowik.com/content/uploads/images/flutter5786.jpg')),
+                    child: Image.network(
+                        'https://logowik.com/content/uploads/images/flutter5786.jpg')),
               ),
             ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
@@ -44,7 +56,7 @@ class _LoginPage extends State<LoginPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -53,14 +65,13 @@ class _LoginPage extends State<LoginPage> {
               ),
             ),
             FlatButton(
-              onPressed: (){
+              onPressed: () {
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
               child: RichText(
                   text: TextSpan(
                 text: 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
-
               )),
             ),
             Container(
@@ -70,8 +81,9 @@ class _LoginPage extends State<LoginPage> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                  //Navigator.push(
+                      //context, MaterialPageRoute(builder: (_) => HomePage()));
+                  _login();
                 },
                 child: Text(
                   'Login',
@@ -79,27 +91,21 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ),
             ),
-
-
-
             Container(
                 child: FlatButton(
-                  onPressed: (){
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => SignupPage()));
-                  },
-                  child: RichText(
-                      text: TextSpan(
-                        text: 'Create account',
-                        style: TextStyle(color: Colors.blue, fontSize: 15),
-
-                      )),
-                )
-            ),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => SignupPage()));
+              },
+              child: RichText(
+                  text: TextSpan(
+                text: 'Create account',
+                style: TextStyle(color: Colors.blue, fontSize: 15),
+              )),
+            )),
             SizedBox(
               height: 130,
             ),
-
           ],
         ),
       ),
