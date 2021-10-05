@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "567141968030",
+    "project_id": "fir-project-sguha1988",
+    "storage_bucket": "fir-project-sguha1988.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567141968030:android:330bc1354bec362865338f",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567141968030-qb6e2je65udomf5i3r2g8t60aojdvn6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWSsLP4lz6ZZ5Z_UcbOW5dsqzqFSX5qoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567141968030-qb6e2je65udomf5i3r2g8t60aojdvn6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567141968030:android:a2f201641a74973665338f",
+        "android_client_info": {
+          "package_name": "com.example.money_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567141968030-qb6e2je65udomf5i3r2g8t60aojdvn6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWSsLP4lz6ZZ5Z_UcbOW5dsqzqFSX5qoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567141968030-qb6e2je65udomf5i3r2g8t60aojdvn6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
