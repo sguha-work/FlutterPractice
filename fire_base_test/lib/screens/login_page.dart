@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'signup.dart';
-class Login extends StatefulWidget {
+import 'home_page.dart';
+import 'signup_page.dart';
+class LoginPage extends StatefulWidget {
   @override
-  _Login createState() => _Login();
+  _LoginPage createState() => _LoginPage();
 }
 
-class _Login extends State<Login> {
+class _LoginPage extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,10 +56,12 @@ class _Login extends State<Login> {
               onPressed: (){
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
-              child: Text(
-                'Forgot Password',
+              child: RichText(
+                  text: TextSpan(
+                text: 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
-              ),
+
+              )),
             ),
             Container(
               height: 50,
@@ -81,20 +83,17 @@ class _Login extends State<Login> {
 
 
             Container(
-                height: 50,
-                width: 250,
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                    color: Colors.blue, borderRadius: BorderRadius.circular(20)),
                 child: FlatButton(
-                  onPressed: () {
+                  onPressed: (){
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Signup()));
+                        context, MaterialPageRoute(builder: (_) => SignupPage()));
                   },
-                  child: Text(
-                    'Create account',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
+                  child: RichText(
+                      text: TextSpan(
+                        text: 'Create account',
+                        style: TextStyle(color: Colors.blue, fontSize: 15),
+
+                      )),
                 )
             ),
             SizedBox(

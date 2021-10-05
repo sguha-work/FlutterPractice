@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\ESAHGUH\\AndroidStudioProjects\\fire_base_test\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\SAHASRANGSHU\\PERSONAL GROOMING\\FlutterPractice\\fire_base_test\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\ESAHGUH\\.gradle\\caches\\transforms-2\\files-2.1\\a935fa587df289485954d05015b0662e\\coordinatorlayout-1.0.0\\res\\values\\values.xml",
@@ -95,7 +95,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ESAHGUH\\AndroidStudioProjects\\fire_base_test\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\SAHASRANGSHU\\PERSONAL GROOMING\\FlutterPractice\\fire_base_test\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

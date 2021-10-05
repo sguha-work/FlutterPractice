@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
-import 'home.dart';
-class Signup extends StatefulWidget {
+import 'login_page.dart';
+import 'home_page.dart';
+class SignupPage extends StatefulWidget {
   @override
-  _Signup createState() => _Signup();
+  _SignupPage createState() => _SignupPage();
 }
 
-class _Signup extends State<Signup> {
+class _SignupPage extends State<SignupPage> {
   TextEditingController dateOfBirthController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
@@ -27,7 +27,7 @@ class _Signup extends State<Signup> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: Text("Signup Page"),
       ),
       body: SingleChildScrollView(
         child: Column(
