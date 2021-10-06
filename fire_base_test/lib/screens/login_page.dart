@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'signup_page.dart';
 import '../widgets/dialog.dart';
-
+import '../utilities/login_signup.dart';
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPage createState() => _LoginPage();
 }
@@ -15,14 +17,16 @@ class _LoginPage extends State<LoginPage> {
   _login() {
     String email = emailController.text;
     String password = passwordController.text;
-    MyDialog.showAlertDialog(context, email);
+    //MyDialog.showAlertDialog(context, email);
+    MyDialog.showAlertDialog(context, LoginSignup.isLoggedIn().toString());
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,10 +46,10 @@ class _LoginPage extends State<LoginPage> {
             ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
                     hintText: 'Enter valid email id as abc@gmail.com'),
@@ -58,7 +62,7 @@ class _LoginPage extends State<LoginPage> {
               child: TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
@@ -69,7 +73,7 @@ class _LoginPage extends State<LoginPage> {
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
               child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                 text: 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               )),
@@ -85,7 +89,7 @@ class _LoginPage extends State<LoginPage> {
                       //context, MaterialPageRoute(builder: (_) => HomePage()));
                   _login();
                 },
-                child: Text(
+                child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
@@ -98,12 +102,12 @@ class _LoginPage extends State<LoginPage> {
                     context, MaterialPageRoute(builder: (_) => SignupPage()));
               },
               child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                 text: 'Create account',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               )),
             )),
-            SizedBox(
+            const SizedBox(
               height: 130,
             ),
           ],

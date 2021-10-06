@@ -3,7 +3,10 @@ import 'login_page.dart';
 import 'home_page.dart';
 import '../utilities/login_signup.dart';
 import '../widgets/dialog.dart';
+import '../models/user.dart';
 class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
+
   @override
   _SignupPage createState() => _SignupPage();
 }
@@ -16,13 +19,20 @@ class _SignupPage extends State<SignupPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
-  void _signup() {
+  void _signup() async{
     String dateOfBirth = dateOfBirthController.text;
     String fullName = fullNameController.text;
     String email = emailController.text;
     String password = passwordController.text;
     String confirmPassword = confirmPasswordController.text;
-    MyDialog.showAlertDialog(context, fullName);
+    //MyDialog.showAlertDialog(context, fullName);
+    User user = User(userGiven_dateOfBirth:dateOfBirth,
+        userGiven_fullName:fullName,
+        userGiven_email:email,
+        userGiven_password:password,
+        userGiven_confirmPassword:confirmPassword);
+    String result= await LoginSignup.signup(user);
+    MyDialog.showAlertDialog(context, result);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -31,10 +41,11 @@ class _SignupPage extends State<SignupPage> {
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
     dateOfBirthController.text = selectedDate.toString();
   }
 
@@ -43,7 +54,7 @@ class _SignupPage extends State<SignupPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Signup Page"),
+        title: const Text("Signup Page"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -68,7 +79,7 @@ class _SignupPage extends State<SignupPage> {
               child: TextField(
                 controller: fullNameController,
                 obscureText: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Full name',
                     hintText: 'Enter your full name'),
@@ -84,17 +95,17 @@ class _SignupPage extends State<SignupPage> {
                   TextField(
                     controller: dateOfBirthController,
                     obscureText: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Date of birth',
                         hintText: 'Enter or select from below yyyy-mm-dd'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
                   RaisedButton(
                     onPressed: () => _selectDate(context),
-                    child: Text('Select date of birth'),
+                    child: const Text('Select date of birth'),
                   ),
                 ],
               ),
@@ -104,7 +115,7 @@ class _SignupPage extends State<SignupPage> {
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
                     hintText: 'Enter valid email id as abc@gmail.com'),
@@ -117,7 +128,7 @@ class _SignupPage extends State<SignupPage> {
               child: TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
@@ -130,7 +141,7 @@ class _SignupPage extends State<SignupPage> {
               child: TextField(
                 controller: confirmPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Confirm Password',
                     hintText: 'Confirm password'),
@@ -139,20 +150,20 @@ class _SignupPage extends State<SignupPage> {
             Container(
               height: 50,
               width: 250,
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: FlatButton(
                 onPressed: () {
                   _signup();
                 },
-                child: Text(
+                child: const Text(
                   'Signup',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 130,
             ),
           ],
