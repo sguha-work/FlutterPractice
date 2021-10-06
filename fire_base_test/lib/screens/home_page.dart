@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
-
+import '../widgets/dialog.dart';
 class HomePage extends StatefulWidget {
+  var uid;
+
+  HomePage({Key? key, required this.uid}) : super(key: key);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(uid);
 }
 
 class _HomePageState extends State<HomePage> {
+  String uid='';
+  _HomePageState(uid) {
+    uid = uid;
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
       ),
       body: Center(
         child: Container(
@@ -23,8 +32,8 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
             },
             child: Text(
-              'Welcome',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              'Welcome '+uid,
+              style: const TextStyle(color: Colors.white, fontSize: 25),
             ),
           ),
         ),
