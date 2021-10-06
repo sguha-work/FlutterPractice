@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'login_page.dart';
 import 'home_page.dart';
 import '../utilities/login_signup.dart';
 import '../widgets/dialog.dart';
 import '../models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
 
@@ -17,22 +20,35 @@ class _SignupPage extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  bool isSupervisor = false;
   DateTime selectedDate = DateTime.now();
 
-  void _signup() async{
-    String dateOfBirth = dateOfBirthController.text;
-    String fullName = fullNameController.text;
-    String email = emailController.text;
-    String password = passwordController.text;
-    String confirmPassword = confirmPasswordController.text;
-    //MyDialog.showAlertDialog(context, fullName);
-    User user = User(userGiven_dateOfBirth:dateOfBirth,
-        userGiven_fullName:fullName,
-        userGiven_email:email,
-        userGiven_password:password,
-        userGiven_confirmPassword:confirmPassword);
-    String result= await LoginSignup.signup(user);
-    MyDialog.showAlertDialog(context, result);
+  bool _validate() {
+    //ToDo
+    return true;
+  }
+
+  void _signup() async {
+    if (_validate()) {
+      String dateOfBirth = dateOfBirthController.text;
+      String fullName = fullNameController.text;
+      String email = emailController.text;
+      String password = passwordController.text;
+      String confirmPassword = confirmPasswordController.text;
+      String phoneNumber = phoneNumberController.text;
+      UserModel user = UserModel(
+          userGiven_dateOfBirth: dateOfBirth,
+          userGiven_fullName: fullName,
+          userGiven_email: email,
+          userGiven_password: password,
+          userGiven_confirmPassword: confirmPassword,
+          userGiven_isAgent: isSupervisor ? false : true,
+          userGiven_isSupervisor: isSupervisor,
+          userGiven_phoneNumber: phoneNumber);
+      String result = await LoginSignup.signup(user);
+      MyDialog.showAlertDialog(context, result);
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -47,6 +63,18 @@ class _SignupPage extends State<SignupPage> {
       });
     }
     dateOfBirthController.text = selectedDate.toString();
+  }
+
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.red;
   }
 
   @override
@@ -112,7 +140,8 @@ class _SignupPage extends State<SignupPage> {
             ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 10),
               child: TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
@@ -122,8 +151,25 @@ class _SignupPage extends State<SignupPage> {
               ),
             ),
             Padding(
+              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 10),
+              child: TextField(
+                controller: phoneNumberController,
+                maxLength: 10,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Phone number',
+                    hintText: 'Enter valid 10 digit phone number'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 10),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: passwordController,
@@ -136,7 +182,7 @@ class _SignupPage extends State<SignupPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 10),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: confirmPasswordController,
@@ -147,13 +193,29 @@ class _SignupPage extends State<SignupPage> {
                     hintText: 'Confirm password'),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: CheckboxListTile(
+                title: const Text('Is supervisor?'),
+                checkColor: Colors.white,
+                //fillColor: MaterialStateProperty.resolveWith(getColor),
+                value: isSupervisor,
+                onChanged: (bool? value) {
+                  setState(() {
+                    isSupervisor = value!;
+                  });
+                },
+              ),
+            ),
             Container(
               height: 50,
               width: 250,
               margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   _signup();
                 },

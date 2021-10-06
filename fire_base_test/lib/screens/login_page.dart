@@ -3,6 +3,7 @@ import 'home_page.dart';
 import 'signup_page.dart';
 import '../widgets/dialog.dart';
 import '../utilities/login_signup.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -14,15 +15,16 @@ class _LoginPage extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  _login() {
+  void _login() async{
     String email = emailController.text;
     String password = passwordController.text;
     //MyDialog.showAlertDialog(context, email);
-    MyDialog.showAlertDialog(context, LoginSignup.isLoggedIn().toString());
+    String result = await LoginSignup.login(email, password);
+    MyDialog.showAlertDialog(context, result);
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -86,7 +88,7 @@ class _LoginPage extends State<LoginPage> {
               child: FlatButton(
                 onPressed: () {
                   //Navigator.push(
-                      //context, MaterialPageRoute(builder: (_) => HomePage()));
+                  //context, MaterialPageRoute(builder: (_) => HomePage()));
                   _login();
                 },
                 child: const Text(
