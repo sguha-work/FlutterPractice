@@ -20,7 +20,7 @@ class _LoginPage extends State<LoginPage> {
     String password = passwordController.text;
     //MyDialog.showAlertDialog(context, email);
     String result = await LoginSignup.login(email, password);
-    MyDialog.showAlertDialog(context, result);
+
     if(result.contains('success__')) {
       String uid = result.split('success__').last;
       Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage(uid: uid)));

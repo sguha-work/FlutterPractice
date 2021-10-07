@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/dialog.dart';
+import '../utilities/firebase_db.dart';
+import '../models/user.dart';
+
 class HomePage extends StatefulWidget {
   var uid;
 
@@ -10,13 +13,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String uid='';
-  _HomePageState(uid) {
-    uid = uid;
+  String uid = '';
+  dynamic user;
+  _HomePageState(uid) {}
+  void _getUserDataFromUID(String uid) async {
+    print('*****uid ' + uid);
+    dynamic snapshot = await FBDB().read(
+        provided_collectionName: 'users_collection', provided_doumentId: uid);
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    print(data.toString());
+
+    setState(() {
+      if(data==null) {
+        user = UserModel(provided_fullName: '');
+      } else {
+        user = UserModel(provided_fullName: data['fullName']);
+      }
+    });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    print('*****getting data');
+    _getUserDataFromUID(widget.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
@@ -27,12 +51,12 @@ class _HomePageState extends State<HomePage> {
           width: 150,
           decoration: BoxDecoration(
               color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              //
             },
             child: Text(
-              'Welcome '+uid,
+              'Welcome '+(user!=null?user.fullName:''),
               style: const TextStyle(color: Colors.white, fontSize: 25),
             ),
           ),

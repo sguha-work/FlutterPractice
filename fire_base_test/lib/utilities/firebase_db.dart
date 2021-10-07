@@ -34,10 +34,8 @@ class FBDB {
 
   Future<String> signin(email, password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       final User userData = userCredential.user!;
       return 'success__' + userData.uid;
     } on FirebaseAuthException catch (e) {
@@ -82,5 +80,14 @@ class FBDB {
     } catch (e) {
       return 'error__' + e.toString();
     }
+  }
+
+  Future<dynamic> read(
+      {String provided_collectionName = '',
+      String provided_doumentId = ''}) async {
+    CollectionReference collectionReferrence =
+        FirebaseFirestore.instance.collection(provided_collectionName);
+    dynamic data = await collectionReferrence.doc(provided_doumentId).get();
+    return data;
   }
 }

@@ -38,14 +38,14 @@ class _SignupPage extends State<SignupPage> {
       String confirmPassword = confirmPasswordController.text;
       String phoneNumber = phoneNumberController.text;
       UserModel user = UserModel(
-          userGiven_dateOfBirth: dateOfBirth,
-          userGiven_fullName: fullName,
-          userGiven_email: email,
-          userGiven_password: password,
-          userGiven_confirmPassword: confirmPassword,
-          userGiven_isAgent: isSupervisor ? false : true,
-          userGiven_isSupervisor: isSupervisor,
-          userGiven_phoneNumber: phoneNumber);
+          provided_dateOfBirth: dateOfBirth,
+          provided_fullName: fullName,
+          provided_email: email,
+          provided_password: password,
+          provided_confirmPassword: confirmPassword,
+          provided_isAgent: isSupervisor ? false : true,
+          provided_isSupervisor: isSupervisor,
+          provided_phoneNumber: phoneNumber);
       String result = await LoginSignup.signup(user);
       MyDialog.showAlertDialog(context, result);
     }

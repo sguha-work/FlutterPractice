@@ -7,24 +7,47 @@ class UserModel {
   String phoneNumber = '0000000000';
   bool isSupervisor = false;
   bool isAgent = true;
+  String regionCode = '';
+  String area = '';
+  String city = '';
+  String pin = '';
+  String state = '';
+  bool isApprovedByAdmin = false;
+  String createdOn = '';
+  String approvedOn = '';
 
-  UserModel({
-    String userGiven_dateOfBirth = '',
-    String userGiven_fullName = '',
-    String userGiven_email = '',
-    String userGiven_password = '',
-    String userGiven_confirmPassword = '',
-    String userGiven_phoneNumber = '0000000000',
-    bool userGiven_isSupervisor = false,
-    bool userGiven_isAgent = true,
-  }) {
-    dateOfBirth = userGiven_dateOfBirth;
-    fullName = userGiven_fullName;
-    email = userGiven_email;
-    password = userGiven_password;
-    confirmPassword = userGiven_confirmPassword;
-    phoneNumber = userGiven_phoneNumber;
-    isSupervisor = userGiven_isSupervisor;
-    isAgent = userGiven_isAgent;
+  UserModel(
+      {String provided_dateOfBirth = '',
+      String provided_fullName = '',
+      String provided_email = '',
+      String provided_password = '',
+      String provided_confirmPassword = '',
+      String provided_phoneNumber = '0000000000',
+      bool provided_isSupervisor = false,
+      bool provided_isAgent = true,
+      String provided_regionCode = '',
+      String provided_area = '',
+      String provided_city = '',
+      String provided_pin = '',
+      String provided_state = '',
+      bool provided_isApprovedByAdmin = false,
+      String provided_createdOn = '',
+      String provided_approvedOn = ''}) {
+    dateOfBirth = provided_dateOfBirth;
+    fullName = provided_fullName;
+    email = provided_email;
+    password = provided_password;
+    confirmPassword = provided_confirmPassword;
+    phoneNumber = provided_phoneNumber;
+    isSupervisor = provided_isSupervisor;
+    isAgent = provided_isAgent;
+    regionCode = provided_regionCode;
+    area = provided_area;
+    city = provided_city;
+    pin = provided_pin;
+    state = provided_state;
+    isApprovedByAdmin = provided_isApprovedByAdmin;
+    createdOn = provided_createdOn;
+    approvedOn = provided_approvedOn;
   }
 }
