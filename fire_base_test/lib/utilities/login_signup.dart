@@ -20,9 +20,7 @@ class LoginSignup {
         'fullName': user.fullName,
         'dateOfBirth': user.dateOfBirth,
         'email': user.email,
-        'phoneNumber': user.phoneNumber,
-        'isSupervisor': user.isSupervisor,
-        'isAgent': user.isAgent
+        'phoneNumber': user.phoneNumber
       };
       String finalResult = await instance.dbInstance
           .write(userGiven_collectionName: 'users_collection', userGiven_document: userAdditionalInfo, userGiven_documentId: uid);

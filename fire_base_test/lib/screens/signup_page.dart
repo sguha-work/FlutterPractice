@@ -21,7 +21,6 @@ class _SignupPage extends State<SignupPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  bool isSupervisor = false;
   DateTime selectedDate = DateTime.now();
 
   bool _validate() {
@@ -38,14 +37,12 @@ class _SignupPage extends State<SignupPage> {
       String confirmPassword = confirmPasswordController.text;
       String phoneNumber = phoneNumberController.text;
       UserModel user = UserModel(
-          provided_dateOfBirth: dateOfBirth,
-          provided_fullName: fullName,
-          provided_email: email,
-          provided_password: password,
-          provided_confirmPassword: confirmPassword,
-          provided_isAgent: isSupervisor ? false : true,
-          provided_isSupervisor: isSupervisor,
-          provided_phoneNumber: phoneNumber);
+          dateOfBirth: dateOfBirth,
+          fullName: fullName,
+          email: email,
+          password: password,
+          userType: 'egent',
+          phoneNumber: phoneNumber);
       String result = await LoginSignup.signup(user);
       MyDialog.showAlertDialog(context, result);
     }
@@ -201,10 +198,10 @@ class _SignupPage extends State<SignupPage> {
                 title: const Text('Is supervisor?'),
                 checkColor: Colors.white,
                 //fillColor: MaterialStateProperty.resolveWith(getColor),
-                value: isSupervisor,
+                value: true,
                 onChanged: (bool? value) {
                   setState(() {
-                    isSupervisor = value!;
+                    //isSupervisor = value!;
                   });
                 },
               ),

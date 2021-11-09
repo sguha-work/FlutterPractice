@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dialog.dart';
 import '../utilities/firebase_db.dart';
@@ -25,11 +26,15 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {
       if(data==null) {
-        user = UserModel(provided_fullName: '');
+        user = UserModel(fullName: '');
       } else {
-        user = UserModel(provided_fullName: data['fullName']);
+        user = UserModel(fullName: data['fullName']);
       }
     });
+    dynamic getUser = await FirebaseAuth.instance.currentUser!;
+    print('************ user'+getUser.toString());
+    String userID = getUser.uid;
+
   }
 
   @override
@@ -54,6 +59,7 @@ class _HomePageState extends State<HomePage> {
           child: TextButton(
             onPressed: () {
               //
+
             },
             child: Text(
               'Welcome '+(user!=null?user.fullName:''),
